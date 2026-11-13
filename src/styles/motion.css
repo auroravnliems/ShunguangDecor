@@ -1,0 +1,11 @@
+/* "Reduce motion" in Settings. The OS's disable-animations option is only followed when the
+   user turns on "Follow Windows" (store.tsx sets data-motion itself), so @media isn't used here. */
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+  animation-duration: 0.01ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+}

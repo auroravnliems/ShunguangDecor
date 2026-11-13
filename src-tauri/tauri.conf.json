@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ShunguangDecor",
+  "mainBinaryName": "ShunguangDecor",
+  "version": "0.1.0",
+  "identifier": "net.asgmc.shunguangdecor",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:3200",
+    "beforeBuildCommand": "npm run hook && npm run build",
+    "frontendDist": "../out"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [],
+    "security": {
+      "csp": {
+        "default-src": "'self'",
+        "script-src": "'self'",
+        "style-src": "'self' 'unsafe-inline'",
+        "img-src": "'self' data: sg: http://sg.localhost https://sg.localhost",
+        "media-src": "'self' sg: http://sg.localhost https://sg.localhost",
+        "font-src": "'self' data:",
+        "connect-src": "'self' ipc: http://ipc.localhost"
+      },
+      "dangerousDisableAssetCspModification": ["style-src"]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "category": "Utility",
+    "shortDescription": "All-in-one Windows customization",
+    "copyright": "GPL-3.0-or-later",
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.ico"],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["Vietnamese", "English", "Russian", "SimpChinese", "Korean", "Japanese", "German", "Spanish", "PortugueseBR", "French"],
+        "displayLanguageSelector": true,
+        "headerImage": "windows/header.bmp",
+        "sidebarImage": "windows/sidebar.bmp",
+        "installerIcon": "icons/icon.ico",
+        "installerHooks": "windows/hooks.nsh",
+        "template": "windows/installer.nsi"
+      }
+    }
+  }
+}

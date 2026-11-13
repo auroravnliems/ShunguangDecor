@@ -1,0 +1,34 @@
+[package]
+name = "sg-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ShunguangDecor core: configuration, languages, parts, profiles, guard process, logging"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+tracing.workspace = true
+dirs = "6"
+sys-locale = "0.3"
+zip = { version = "9", default-features = false, features = ["deflate"] }
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
+tracing-appender = "0.2"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "bmp"] }
+memory-stats = "1"
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_Graphics_Dxgi",
+    "Win32_Graphics_Gdi",
+    "Win32_System_Registry",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Threading",
+    "Win32_UI_Shell",
+] }
+
+[dev-dependencies]
+tempfile = "3"

@@ -1,0 +1,278 @@
+/* Shared controls (v9): switch, segmented choice, slider, color swatches, group, select. */
+
+/* Switch with beveled corners. */
+.tg {
+  position: relative;
+  width: 38px;
+  height: 18px;
+  flex: none;
+  background: #d4dae3;
+  clip-path: var(--cut5);
+  transition: background 0.35s;
+}
+.tg::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 14px;
+  height: 12px;
+  background: #fff;
+  transition: transform 0.35s var(--out);
+}
+.tg.on {
+  background: var(--blue);
+}
+.tg.on::after {
+  transform: translateX(18px);
+}
+.tg:disabled {
+  opacity: 0.45;
+}
+
+/* Pick one of a few options. */
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.seg button {
+  padding: 6px 11px;
+  font-size: 11.5px;
+  transition: all 0.3s;
+  white-space: nowrap;
+  color: var(--ink2);
+}
+.seg button.on {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* Slider: the filled part is painted blue according to --p. */
+.rngw {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.rng {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue) var(--p, 50%), #dde2ea var(--p, 50%));
+  outline: none;
+}
+.rng::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 16px;
+  background: #fff;
+  border: 2px solid var(--blue);
+  cursor: pointer;
+}
+.rng::-moz-range-thumb {
+  width: 12px;
+  height: 16px;
+  background: #fff;
+  border: 2px solid var(--blue);
+  border-radius: 0;
+  cursor: pointer;
+}
+.val {
+  width: 46px;
+  text-align: right;
+  font: 700 12px var(--font-display);
+  color: var(--ink);
+}
+
+/* Preset color swatches + the color-picker swatch. */
+.sw {
+  position: relative;
+  display: flex;
+  gap: 6px;
+}
+.sw > button {
+  width: 22px;
+  height: 22px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s;
+}
+.sw > button:hover {
+  transform: translateY(-2px);
+}
+.sw > button.on {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.sw > button.pick {
+  background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+}
+.picker {
+  position: absolute;
+  z-index: 40;
+  top: 32px;
+  left: 0;
+  width: 220px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(30, 40, 70, 0.16), 0 0 0 1px var(--line);
+  clip-path: var(--cutb);
+  animation: menuIn 0.3s var(--out) both;
+}
+.picker .sv {
+  position: relative;
+  height: 130px;
+  cursor: crosshair;
+  background-image: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent);
+  touch-action: none;
+}
+.picker .sv i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.picker .hue {
+  margin-top: 10px;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: linear-gradient(90deg, red, yellow, lime, cyan, blue, magenta, red);
+  outline: none;
+}
+.picker .hue::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 14px;
+  background: #fff;
+  border: 1px solid var(--ink);
+}
+.picker .hexrow {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.picker .hexrow span {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+.picker .hexrow input {
+  flex: 1;
+  height: 26px;
+  border: 1px solid var(--line);
+  padding: 0 8px;
+  font: 600 12px var(--font-display);
+  outline: none;
+}
+.picker .hexrow input.bad {
+  border-color: var(--danger);
+}
+
+/* Control group. The white beveled background lives on ::before so the dropdown list / color picker
+   inside is not cut off by clip-path; a group with an open list is raised above the other groups. */
+.grp {
+  position: relative;
+  z-index: 0;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+}
+.grp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #fff;
+  clip-path: var(--cut);
+}
+.grp:has(.menu),
+.grp:has(.picker) {
+  z-index: 10;
+}
+.grp h5 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.grp h5 small {
+  font: 600 8px var(--font-display);
+  letter-spacing: 1.4px;
+  color: #b3bac6;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--ink2);
+}
+.row:last-child {
+  margin-bottom: 0;
+}
+.row > label {
+  width: 96px;
+  flex: none;
+}
+.row .hint {
+  font-size: 11px;
+  color: var(--mut);
+}
+
+/* Square select (dropdown). */
+.selw {
+  position: relative;
+}
+.sel {
+  height: 32px;
+  min-width: 140px;
+  max-width: 240px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 0 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--ink);
+  font-weight: 600;
+  transition: border-color 0.3s;
+}
+.sel:hover:not(:disabled) {
+  border-color: var(--blue);
+}
+.sel > span {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sel::after {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid #7d8594;
+  border-bottom: 1.5px solid #7d8594;
+  transform: rotate(45deg) translateY(-2px);
+}
+.sel:disabled {
+  opacity: 0.45;
+}
+.selw .menu {
+  left: 0;
+  top: 36px;
+  max-height: 280px;
+  overflow-y: auto;
+}

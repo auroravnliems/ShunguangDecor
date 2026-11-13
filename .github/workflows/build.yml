@@ -1,0 +1,51 @@
+# Check and build the ShunguangDecor installer (Windows).
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # The toolchain comes from rust-toolchain.toml (stable MSVC).
+      - name: Rust toolchain
+        run: rustup show active-toolchain && rustup component add clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      # The in-Explorer DLL must be built before the app so the exe can embed it.
+      - run: npm run hook -- --locked
+      # Tauri needs the out/ directory (the built UI) when compiling the Rust part.
+      - run: npm run build
+      - run: cargo test --workspace --locked
+      - run: cargo clippy --workspace --locked -- -D warnings
+
+      - name: Build installer
+        run: npx tauri build
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: ShunguangDecor-setup
+          path: target/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error

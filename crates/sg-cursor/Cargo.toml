@@ -1,0 +1,26 @@
+[package]
+name = "sg-cursor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Mouse cursors: read/write .cur/.ani, import schemes, apply to Windows with backup"
+
+[dependencies]
+sg-core.workspace = true
+serde.workspace = true
+toml.workspace = true
+tracing.workspace = true
+zip = { version = "9", default-features = false, features = ["deflate"] }
+image = { version = "0.25", default-features = false, features = ["png", "ico"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_System_Registry",
+    "Win32_Security",
+    "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[dev-dependencies]
+tempfile = "3"

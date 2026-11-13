@@ -1,0 +1,29 @@
+[package]
+name = "sg-explorer"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "App side of the in-Explorer DLL: extracts the embedded DLL, loads it into explorer.exe, runs the pipe server, and watches for Explorer restarts"
+
+[dependencies]
+sg-core.workspace = true
+sg-explorer-proto.workspace = true
+tracing.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+sg-desktop.workspace = true
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Storage_FileSystem",
+    "Win32_System_IO",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Pipes",
+    "Win32_System_RemoteDesktop",
+    "Win32_System_Threading",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[dev-dependencies]
+tempfile = "3"

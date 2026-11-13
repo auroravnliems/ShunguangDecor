@@ -1,0 +1,37 @@
+/* Color palette, easing curves, chamfered corners — taken exactly from the approved v9 mockup. */
+:root {
+  --blue: #3b7be9;
+  --blue2: #2f66cc;
+  --cyan: #5bc8ef;
+  --pink: #e889c1;
+  --ink: #22262f;
+  --ink2: #4a5160;
+  --mut: #8b94a3;
+  --line: #e3e7ee;
+  --bg: #f4f6f9;
+  --dark: #2b2f37;
+  --ok: #29c483;
+  --danger: #e5484d;
+
+  --ov: cubic-bezier(0.17, 0.67, 0.22, 1.03);
+  --out: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  --cut: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  --cutb: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  --cut5: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+
+  /* Be Vietnam Pro has no Cyrillic glyphs → Russian text falls back to Montserrat. CJK uses the operating system's fonts. */
+  --cjk: system-ui;
+  --font-text: "Be Vietnam Pro", "Montserrat Variable", var(--cjk), sans-serif;
+  --font-display: "Montserrat Variable", "Be Vietnam Pro", var(--cjk), sans-serif;
+}
+
+:lang(zh-CN) {
+  --cjk: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui;
+}
+:lang(ja) {
+  --cjk: "Yu Gothic UI", "Hiragino Sans", "Noto Sans CJK JP", system-ui;
+}
+:lang(ko) {
+  --cjk: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans CJK KR", system-ui;
+}

@@ -1,0 +1,40 @@
+[package]
+name = "sg-explorer-hook"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "shunguang_explorer.dll — DLL loaded into explorer.exe to color desktop labels"
+
+# cdylib = the real DLL embedded into the app; rlib = so `cargo test` can run the logic.
+# Build the real DLL: `npm run hook` (tools/build-hook.mjs, static CRT so Explorer does not need vcruntime140.dll).
+[lib]
+name = "sg_explorer_hook"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+sg-explorer-proto.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_System_Com",
+    "Win32_System_Ole",
+    "Win32_System_Variant",
+    "Win32_Graphics_Gdi",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_IO",
+    "Win32_System_LibraryLoader",
+    "Win32_System_RemoteDesktop",
+    "Win32_System_Threading",
+    "Win32_UI_Controls",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[dev-dependencies]
+tempfile = "3"
+
+# Only for the `paint_harness` test (comctl32 v6 activation context, PrintWindow).
+[target.'cfg(windows)'.dev-dependencies]
+windows = { workspace = true, features = ["Win32_System_ApplicationInstallationAndServicing", "Win32_Storage_Xps"] }

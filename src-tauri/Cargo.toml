@@ -1,0 +1,55 @@
+[package]
+name = "shunguang-decor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "ShunguangDecor — all-in-one Windows customization"
+
+[lib]
+name = "shunguang_decor_lib"
+crate-type = ["rlib"]
+
+[[bin]]
+name = "ShunguangDecor"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+sg-core.workspace = true
+sg-cursor.workspace = true
+sg-desktop.workspace = true
+sg-capture.workspace = true
+sg-wallpaper.workspace = true
+sg-explorer.workspace = true
+sg-taskbar.workspace = true
+sg-labels.workspace = true
+sg-features.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+tracing.workspace = true
+dirs = "6"
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-single-instance = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Dwm",
+    # lifecycle.rs (the installer's --quit / --uninstall-cleanup)
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_System_Com",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_Registry",
+    "Win32_System_RemoteDesktop",
+    "Win32_System_Threading",
+] }
+
+[dev-dependencies]
+tempfile = "3"

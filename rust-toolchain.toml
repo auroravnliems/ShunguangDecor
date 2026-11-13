@@ -1,0 +1,3 @@
+[toolchain]
+# Windows only; the DLL loaded into Explorer needs MSVC (static CRT).
+channel = "stable-x86_64-pc-windows-msvc"

@@ -1,0 +1,20 @@
+[package]
+name = "sg-labels"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Desktop file-name label colors (core side): configuration, auto color with hysteresis, fallback method"
+
+[dependencies]
+sg-core.workspace = true
+sg-desktop.workspace = true
+sg-explorer.workspace = true
+sg-explorer-proto.workspace = true
+serde.workspace = true
+toml.workspace = true
+tracing.workspace = true
+image = { version = "0.25", default-features = false }
+
+[dev-dependencies]
+tempfile = "3"
+serde_json.workspace = true

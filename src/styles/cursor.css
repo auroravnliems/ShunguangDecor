@@ -1,0 +1,364 @@
+/* Cursors page (v9 .pk / .cgrid / .tryz). */
+.cur-body {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  top: 100px;
+  bottom: 0;
+}
+.cur-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+}
+.cur-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cur-main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 54px;
+  bottom: 74px;
+  overflow: hidden;
+}
+.cur-main > [role="tabpanel"] {
+  height: 100%;
+}
+.cur-empty {
+  grid-column: 1 / -1;
+  padding: 26px;
+  font-size: 13px;
+  color: var(--mut);
+  background: #fff;
+  clip-path: var(--cut);
+}
+
+/* Cursor set grid: with many sets it scrolls inside, and the page has no scrollbar. */
+.cur-grid {
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 92px;
+  gap: 10px;
+  padding-right: 4px;
+}
+.cur-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px 0 22px;
+  background: #fff;
+  clip-path: var(--cut);
+  cursor: pointer;
+  transition: background 0.35s;
+  animation: shiftSlideLeft 0.7s var(--out) both;
+}
+.cur-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  background: transparent;
+  transition: background 0.35s;
+}
+.cur-card:hover,
+.cur-card.on {
+  background: #eef4ff;
+}
+.cur-card.on::before {
+  background: var(--blue);
+}
+.cur-card .ims {
+  display: flex;
+  gap: 6px;
+  height: 34px;
+  align-items: center;
+}
+.cur-card .nm {
+  font-size: 13px;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cur-card .nm small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--mut);
+}
+.cur-card .use {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  font: 800 8px var(--font-display);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.cur-card .more {
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  font-size: 11px;
+  color: var(--blue);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cur-card:hover .more,
+.cur-card:focus-within .more {
+  opacity: 1;
+}
+.cur-card .more:disabled {
+  opacity: 0.4;
+}
+.cur-card.add {
+  align-items: flex-start;
+  background: #f3f6fb;
+}
+.cur-card.add b {
+  font-size: 14px;
+  color: var(--blue);
+}
+.cur-card.add small {
+  font-size: 11px;
+  color: var(--mut);
+  max-width: 85%;
+}
+.cur-card.add .more {
+  opacity: 1;
+}
+
+/* Cursor image (cut from the frame strip). */
+.cur-sprite {
+  display: inline-block;
+  flex: none;
+  background-repeat: no-repeat;
+}
+.cur-sprite.px {
+  image-rendering: pixelated;
+}
+.cur-sprite.empty {
+  background: repeating-linear-gradient(135deg, #e3e7ee 0 1px, transparent 1px 6px);
+  opacity: 0.7;
+}
+
+/* Details. */
+.cur-detail {
+  height: 100%;
+}
+.cur-dbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.cur-dbar .nm {
+  flex: 1;
+  min-width: 0;
+  font: 800 16px var(--font-text);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cur-dbar .nm small {
+  margin-left: 8px;
+  font: 600 10px var(--font-display);
+  letter-spacing: 0.5px;
+  color: #b3bac6;
+}
+.cur-cgrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  padding: 12px;
+  background-size: cover;
+  background-position: center;
+  transition: background-color 0.5s;
+}
+.cur-cgrid.light {
+  background-color: #fff;
+}
+.cur-cgrid.dark {
+  background-color: #1d2129;
+}
+.cur-cgrid.wall {
+  background-color: #000;
+}
+.cur-cgrid .cell {
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  animation: shiftSlideLeft 0.7s var(--out) both;
+  transition: background 0.3s;
+}
+.cur-cgrid .cell .cur-sprite {
+  transition: transform 0.35s var(--ov);
+}
+.cur-cgrid .cell:hover .cur-sprite {
+  transform: scale(1.15);
+}
+.cur-cgrid .cell span:last-child {
+  font-size: 10px;
+  color: var(--mut);
+  white-space: nowrap;
+}
+.cur-cgrid.dark .cell span:last-child,
+.cur-cgrid.wall .cell span:last-child {
+  color: #c9cfda;
+}
+.cur-cgrid.light .cell {
+  box-shadow: inset 0 0 0 1px #f0f2f6;
+}
+.cur-cgrid.dark .cell {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.cur-cgrid.wall .cell {
+  background: rgba(0, 0, 0, 0.18);
+}
+.cur-try {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 8px;
+}
+.cur-try > div {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #fff;
+  clip-path: var(--cut);
+  font-size: 12px;
+  color: var(--ink2);
+  text-align: center;
+}
+.cur-try small {
+  font-size: 10px;
+  color: var(--mut);
+}
+.cur-try .lnk {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.cur-try input {
+  width: 80%;
+  height: 28px;
+  border: 1px solid var(--line);
+  padding: 0 8px;
+  font: 12px var(--font-text);
+  outline: none;
+}
+
+/* Size & display. */
+.cur-size .row .hint {
+  flex: 1;
+}
+.cur-preview {
+  position: relative;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1d2129;
+  background-size: cover;
+  background-position: center;
+  clip-path: var(--cut);
+}
+.cur-preview img {
+  max-width: 256px;
+  max-height: 160px;
+}
+.cur-preview img.px {
+  image-rendering: pixelated;
+}
+.cur-preview small {
+  position: absolute;
+  left: 14px;
+  bottom: 10px;
+  padding: 3px 8px;
+  font-size: 10.5px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+}
+.cur-preview .hint {
+  color: #c9cfda;
+  font-size: 12px;
+}
+
+/* Footer: game note + a line for technical users. */
+.cur-foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--mut);
+}
+.cur-foot p + p {
+  margin-top: 2px;
+}
+.cur-foot button {
+  color: var(--blue);
+  text-decoration: underline;
+  font-size: 11px;
+}
+
+/* File picker box for one role + the drag-and-drop overlay. */
+.cur-picker {
+  width: 420px;
+}
+.cur-files {
+  display: grid;
+  gap: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 12px 0;
+}
+.cur-files button {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 12.5px;
+  background: #f3f6fb;
+  color: var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: background 0.3s;
+}
+.cur-files button:hover {
+  background: #e4edfc;
+}
+.cur-files button.on {
+  background: var(--blue);
+  color: #fff;
+}
+.cur-drop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(59, 123, 233, 0.16);
+  border: 3px dashed var(--blue);
+  font: 800 18px var(--font-text);
+  color: var(--blue2);
+  pointer-events: none;
+}

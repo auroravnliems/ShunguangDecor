@@ -1,0 +1,105 @@
+/* Dialogs and small toasts. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(34, 38, 47, 0.35);
+  display: grid;
+  place-items: center;
+  animation: fadeIn 0.3s ease-out both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.dialog {
+  width: 460px;
+  max-width: calc(100% - 80px);
+  background: #fff;
+  padding: 24px 26px 20px;
+  clip-path: var(--cut);
+  box-shadow: 0 30px 80px rgba(30, 40, 70, 0.22);
+  position: relative;
+  animation: dlgIn 0.45s var(--ov) both;
+}
+.dialog::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 4px;
+  height: 36px;
+  background: var(--blue);
+}
+@keyframes dlgIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+.dialog h3 {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.dialog .body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink2);
+  user-select: text;
+}
+.dialog .body input {
+  margin-top: 12px;
+  width: 100%;
+  height: 34px;
+  border: 1px solid var(--line);
+  padding: 0 10px;
+  font-size: 13px;
+  outline: none;
+}
+.dialog .body input:focus {
+  border-color: var(--blue);
+}
+.dialog .actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.toasts {
+  position: absolute;
+  right: 80px;
+  bottom: 24px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+  padding: 10px 16px 10px 14px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(30, 40, 70, 0.16);
+  clip-path: var(--cutb);
+  font-size: 12.5px;
+  color: var(--ink2);
+  text-align: left;
+  animation: shiftSlideLeft 0.6s var(--out) both;
+}
+.toast i {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  background: var(--ok);
+}
+.toast.err i {
+  background: var(--danger);
+}

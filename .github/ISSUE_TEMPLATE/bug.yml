@@ -1,0 +1,61 @@
+name: "Bug report"
+description: "Report a problem"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! The clearer, the faster the fix.
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Settings → About
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Windows version
+      description: Press Win + R, type winver
+      placeholder: "Windows 11 24H2 (build 26100)"
+    validations:
+      required: true
+  - type: dropdown
+    id: part
+    attributes:
+      label: Affected part
+      options:
+        - App (window, tray, Settings)
+        - YASB Taskbar
+        - Live wallpaper
+        - Mouse cursor
+        - Desktop labels
+        - Hidden features
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the … page
+        2. Click …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected vs. actual
+      description: Drag screenshots or a video here if you have them
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Bug report
+      description: |
+        In the app: Settings → Support → Export bug report, then drag the .zip here. It contains logs, settings and system info, no personal files.

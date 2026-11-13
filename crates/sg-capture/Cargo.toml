@@ -1,0 +1,21 @@
+[package]
+name = "sg-capture"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Captures the real desktop layer of a monitor for the preview pane (kept in memory only)"
+
+[dependencies]
+sg-core.workspace = true
+sg-desktop.workspace = true
+tracing.workspace = true
+serde.workspace = true
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    "Win32_Storage_Xps",
+    "Win32_UI_WindowsAndMessaging",
+] }

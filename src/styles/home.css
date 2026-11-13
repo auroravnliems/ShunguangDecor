@@ -1,0 +1,162 @@
+/* Home page (v9): greeting, status, two large buttons, wallpaper image, 6 part cards. */
+.home-l {
+  position: absolute;
+  left: 110px;
+  top: 64px;
+  width: 440px;
+}
+.stat {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink2);
+}
+.sq {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 rgba(41, 196, 131, 0.5);
+  animation: ping 2s infinite;
+}
+.sq.bad {
+  background: var(--danger);
+  animation: none;
+}
+@keyframes ping {
+  70% {
+    box-shadow: 0 0 0 7px rgba(41, 196, 131, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(41, 196, 131, 0);
+  }
+}
+.home-btns {
+  margin-top: 26px;
+  display: flex;
+  gap: 10px;
+}
+/* Long translations: slightly smaller text, buttons don't shrink (text that is too long is cut with "…", and there is a title). */
+.home-btns .jb {
+  min-width: 0;
+  padding: 0 44px 0 18px;
+  flex: 0 1 auto;
+}
+.home-btns .jb .chev {
+  right: 12px;
+  width: 26px;
+}
+.home-btns .jb b {
+  font-size: 14px;
+}
+.hero {
+  position: absolute;
+  left: 560px;
+  top: 40px;
+  width: 580px;
+  height: 330px;
+}
+.hatch {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 330px;
+  height: 300px;
+  background: repeating-linear-gradient(135deg, #cdd5e1 0 1px, transparent 1px 8px);
+}
+.hatch .tl {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  text-align: right;
+  font: 800 9px/1.5 var(--font-display);
+  letter-spacing: 0.4px;
+  color: #2b2f37;
+}
+.hatch .pk {
+  position: absolute;
+  right: 16px;
+  top: 46px;
+  width: 50px;
+  height: 8px;
+  background: var(--pink);
+}
+.shot {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 470px;
+  height: 264px;
+  overflow: hidden;
+  clip-path: var(--cutb);
+  background: #1d2129;
+}
+.shot .scn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.8s, transform 1.6s var(--out);
+}
+.shot .scn.on {
+  opacity: 1;
+  transform: none;
+}
+.shot .empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(135deg, #2a2f39 0 1px, transparent 1px 8px), #1d2129;
+  color: #aab3c1;
+  font-size: 12.5px;
+  text-align: center;
+  padding: 0 40px;
+}
+.blue-sq {
+  position: absolute;
+  left: 478px;
+  top: 290px;
+  width: 14px;
+  height: 14px;
+  background: var(--blue);
+}
+.info {
+  position: absolute;
+  left: 0;
+  top: -6px;
+  width: 460px;
+}
+.info .nm {
+  font: 800 13px var(--font-text);
+}
+.info .sub {
+  font: 600 9px var(--font-display);
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--blue), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mods {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  top: 418px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.mod-body {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  top: 100px;
+  display: grid;
+  gap: 14px;
+}

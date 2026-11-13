@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+body {
+  font-family: var(--font-text);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  cursor: default;
+}
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+input {
+  font-family: inherit;
+  user-select: text;
+}
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Design stage of 1280×760, scaled with `zoom` to fit the window (fit.ts). */
+#stage {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: linear-gradient(rgba(206, 214, 226, 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(206, 214, 226, 0.45) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.mut {
+  color: var(--mut);
+}
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

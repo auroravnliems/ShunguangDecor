@@ -1,0 +1,10 @@
+[package]
+name = "sg-explorer-proto"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Pipe protocol between the ShunguangDecor app and the DLL inside Explorer (no Windows dependency)"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

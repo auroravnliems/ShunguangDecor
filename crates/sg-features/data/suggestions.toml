@@ -1,0 +1,23 @@
+# Feature suggestions. Each entry has passed 3 verification conditions:
+#   1) id + name exist in FeatureDictionary.pfs (test `suggestions_exist_in_dictionary` enforces this);
+#   2) the configuration exists on a build 26200 machine via RtlQueryAllFeatureConfigurations
+#      (`cargo test -p sg-features --test suggestions_real_machine -- --ignored`, read-only);
+#   3) the effect is publicly described by several sources (listed in the `source` field).
+# Display name/description come from the keys `features.suggest.<id>.name` / `.desc` in src/locales/*.json.
+
+# Only claims the battery icon style change. Sources say the show-battery-percentage option usually also needs ID 48433719
+# (the app doesn't touch that ID) and the new battery style was temporarily pulled once, so the description doesn't promise a percentage.
+[[s]]
+id = 48822452
+name = "Update_BatteryIcon"
+source = "https://winaero.com/windows-11-battery-percentage-taskbar ; https://www.windowscentral.com/software-apps/windows-11/microsoft-is-finally-adding-a-highly-requested-feature-to-the-taskbar-on-windows-11"
+
+[[s]]
+id = 29532725
+name = "ExtendedUIXamlRefresh"
+source = "https://betanews.com/2024/02/11/how-to-enable-the-new-taskbar-animation-effects-microsoft-has-hidden-in-windows-11 ; https://www.neowin.net/news/windows-11-is-getting-modernized-taskbar-thumbnails-with-new-animations/ ; https://mspoweruser.com/after-two-years-windows-11s-taskbar-finally-has-new-thumbnails-and-animations"
+
+[[s]]
+id = 29785184
+name = "TaskbarDynamicIconScaling"
+source = "https://pureinfotech.com/make-taskbar-icons-smaller-windows-11/ ; https://www.neowin.net/news/windows-11-is-finally-getting-small-taskbar-buttons ; https://windowsreport.com/windows-11-24h2-will-finally-introduce-a-new-smaller-taskbar-feature/"

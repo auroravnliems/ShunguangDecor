@@ -1,0 +1,213 @@
+/* Hidden Features page: top status strip, tab row, scroll area with suggestion cards / table / details. */
+.ft-body {
+  position: absolute;
+  left: 110px;
+  right: 110px;
+  top: 100px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ft-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  min-height: 40px;
+  padding: 10px 18px 10px 26px;
+  flex: none;
+}
+.ft-strip b {
+  display: inline;
+  margin: 0;
+}
+.ft-strip span {
+  color: var(--mut);
+  font-size: 12.5px;
+}
+.ft-strip .ib:last-child {
+  margin-left: auto;
+}
+.ft-strip.warn::before {
+  background: #e8a23b;
+}
+.ft-tabs {
+  flex: none;
+}
+.ft-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Suggestion cards. */
+.ft-cards {
+  display: grid;
+  gap: 10px;
+}
+.ft-card {
+  position: relative;
+  z-index: 0;
+  padding: 14px 18px 12px;
+}
+.ft-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #fff;
+  clip-path: var(--cut);
+}
+.ft-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.ft-card p {
+  margin: 8px 0 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink2);
+}
+.ft-card-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 11.5px;
+  color: var(--mut);
+}
+.ft-card-foot code {
+  font: 11px var(--font-display);
+  color: #8a93a3;
+}
+.ft-card-foot .jb {
+  margin-left: auto;
+}
+
+/* Results / registration table. */
+.ft-table-wrap {
+  margin-top: 10px;
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid var(--line);
+}
+.ft-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--ink2);
+}
+.ft-table th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  text-align: left;
+  font-weight: 600;
+  padding: 6px 10px;
+  color: var(--ink);
+}
+.ft-table td {
+  padding: 5px 10px;
+  border-top: 1px solid var(--line);
+}
+.ft-table tbody tr {
+  cursor: pointer;
+}
+.ft-table tbody tr:hover {
+  background: #f4f8ff;
+}
+.ft-table tbody tr.on {
+  background: #e6efff;
+}
+.ft-link {
+  font: inherit;
+  color: var(--blue);
+  text-decoration: underline;
+}
+.ft-num {
+  flex: none;
+  width: 90px;
+}
+.ft-path {
+  font-size: 11.5px;
+  color: var(--mut);
+  word-break: break-all;
+}
+.ft-warn {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--mut);
+}
+
+/* "All" tab: taller table, "Search the web" button, pagination bar. */
+/* No scrolling of its own: only `.ft-scroll` scrolls vertically, and the (sticky) column headers stick to it. */
+.ft-all-wrap {
+  max-height: none;
+  overflow: visible;
+}
+.ft-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px 20px;
+  margin-top: 8px;
+}
+.ft-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--ink2);
+  cursor: pointer;
+}
+.ft-all-wrap.busy {
+  opacity: 0.6;
+}
+.ft-dim {
+  color: var(--mut);
+  font-size: 11px;
+}
+.ft-count {
+  margin-top: 8px;
+}
+.ft-web {
+  font: inherit;
+  font-size: 11px;
+  padding: 2px 8px;
+  color: var(--blue);
+  border: 1px solid var(--line);
+  background: transparent;
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ft-web:hover {
+  background: #f4f8ff;
+}
+.ft-pager {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+.ft-pager.top {
+  margin: 8px 0 0;
+}
+.ft-pager-info {
+  font-size: 12px;
+  color: var(--ink2);
+  min-width: 90px;
+  text-align: center;
+}
+.ft-pager-jump {
+  margin-left: auto;
+  width: 110px;
+}

@@ -1,0 +1,65 @@
+/* Real-desktop preview pane (components/DesktopPreview.tsx). */
+.dpv {
+  position: relative;
+  width: 100%;
+  background: var(--dark);
+  overflow: hidden;
+  clip-path: var(--cut);
+}
+.dpv .dpv-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.dpv .dpv-img.on {
+  opacity: 1;
+}
+.dpv .dpv-over {
+  position: absolute;
+  inset: 0;
+}
+.dpv .dpv-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aab3c2;
+  font-size: 12px;
+  text-align: center;
+  padding: 12px;
+}
+.dpv-pick {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  display: flex;
+  gap: 4px;
+  z-index: 3;
+}
+.dpv-pick button {
+  min-width: 26px;
+  height: 24px;
+  padding: 0 8px;
+  font: 600 11px var(--font-text);
+  color: #fff;
+  background: rgba(34, 38, 47, 0.7);
+  border: 0;
+  cursor: pointer;
+}
+.dpv-pick button.on {
+  background: var(--blue);
+}
+.dpv-pick button:focus-visible {
+  outline: 2px solid var(--cyan);
+}
+/* The live-playback layer (video/GIF) sits below the PNG icon layer; the DOM order already places it before the capture layer. */
+.dpv .dpv-media {
+  pointer-events: none;
+}

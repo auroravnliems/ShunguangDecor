@@ -1,0 +1,255 @@
+/* YASB Taskbar page. Shares its layout with the Desktop labels page (.lb-*): real desktop on the left, controls on the right. */
+
+.tb-body .tb-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* ---------- Mock bar ----------
+   All sizes are computed from the preview frame width (cqw) against a reference 1920 px screen: u = 1 real px. */
+.tbp {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  pointer-events: none;
+  --u: calc(100cqw / 1920);
+}
+.tbp-bar {
+  position: absolute;
+  left: calc(var(--m) * var(--u));
+  right: calc(var(--m) * var(--u));
+  height: calc(var(--h) * var(--u));
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 calc(10 * var(--u));
+  background: var(--bg);
+  color: var(--fc);
+  font-family: var(--ff);
+  font-size: max(5px, calc(var(--fs) * var(--u)));
+  font-weight: 500;
+  transition: height 0.3s var(--out), left 0.3s var(--out), right 0.3s var(--out), top 0.3s var(--out), bottom 0.3s var(--out), background 0.2s linear;
+}
+.tbp-bar.top {
+  top: calc(var(--m) * var(--u));
+}
+.tbp-bar.bottom {
+  bottom: calc(var(--m) * var(--u));
+}
+.tbp-bar.float {
+  border-radius: calc(8 * var(--u));
+  box-shadow: 0 calc(2 * var(--u)) calc(10 * var(--u)) rgba(0, 0, 0, 0.3);
+}
+.tbp-bar.blur-blur {
+  backdrop-filter: blur(calc(10 * var(--u)));
+}
+.tbp-bar.blur-acrylic {
+  backdrop-filter: blur(calc(22 * var(--u))) saturate(150%);
+}
+.tbp-zone {
+  display: flex;
+  align-items: center;
+  gap: calc(14 * var(--u));
+  min-width: 0;
+  height: 100%;
+}
+.tbp-zone.center {
+  justify-content: center;
+}
+.tbp-zone.right {
+  justify-content: flex-end;
+}
+.tbp-w {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  --s: max(4px, calc(var(--h) * var(--u) * 0.42));
+}
+.tbp-ico {
+  width: var(--s);
+  height: var(--s);
+}
+.tbp-win {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: max(0.5px, calc(var(--s) * 0.1));
+  width: var(--s);
+  height: var(--s);
+}
+.tbp-win i {
+  background: var(--ac);
+}
+.tbp-apps {
+  display: flex;
+  gap: calc(var(--s) * 0.5);
+}
+.tbp-apps i {
+  position: relative;
+  display: block;
+  width: var(--s);
+  height: var(--s);
+}
+.tbp-apps i::after {
+  content: "";
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: -22%;
+  height: max(1px, calc(var(--s) * 0.12));
+  background: var(--ac);
+}
+.tbp-txt {
+  white-space: nowrap;
+}
+.tbp-line {
+  display: block;
+  width: calc(var(--s) * 3);
+  height: max(1px, calc(var(--s) * 0.22));
+  background: currentColor;
+  opacity: 0.55;
+}
+
+/* ---------- Tab Widget ---------- */
+.tb-zones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.tb-zone {
+  min-height: 96px;
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px dashed #cbd2dd;
+  transition: background 0.2s, border-color 0.2s;
+}
+.tb-zone.drop {
+  border-color: var(--blue);
+  background: #f3f7ff;
+}
+.tb-zone > b {
+  margin-bottom: 2px;
+  font: 700 8.5px var(--font-display);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #a8b0bd;
+}
+.tb-empty {
+  font-size: 11px;
+  color: var(--mut);
+}
+.tb-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 4px 5px 7px;
+  background: #f3f6fb;
+  font-size: 11px;
+  color: var(--ink);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: background 0.2s;
+}
+.tb-chip::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 10px;
+  background: radial-gradient(circle, #aab2bf 1px, transparent 1.4px) 0 0 / 3px 3.4px;
+}
+.tb-chip:hover,
+.tb-chip:focus-visible {
+  background: #e6eefc;
+  outline: none;
+}
+.tb-chip:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+.tb-chip.ghosted {
+  opacity: 0.35;
+}
+.tb-chip.gap-before {
+  box-shadow: 0 -2px 0 var(--blue);
+}
+.tb-chip.gap-after {
+  box-shadow: 0 2px 0 var(--blue);
+}
+.tb-zones.dragging .tb-chip {
+  cursor: grabbing;
+}
+.tb-name {
+  flex: 1;
+  min-width: 0;
+}
+.tb-x {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--mut);
+  cursor: pointer;
+}
+.tb-x:hover {
+  color: #d34a4a;
+}
+.tb-ghost {
+  position: fixed;
+  z-index: 60;
+  padding: 5px 10px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 11px;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(30, 40, 70, 0.25);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+/* The "+ Add widget" catalog. */
+.tb-cat {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+.tb-cat button {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fff;
+  text-align: left;
+  font: 12px var(--font-text);
+  color: var(--ink);
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: background 0.2s;
+}
+.tb-cat button:hover:not(:disabled) {
+  background: #e6eefc;
+}
+.tb-cat button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.tb-cat small {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--mut);
+}
+
+/* A widget's own customization box. */
+.tb-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+.tb-opts .row {
+  margin-bottom: 0;
+}

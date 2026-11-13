@@ -1,0 +1,328 @@
+/* Wallpaper page: reuses the .cur-body/.cur-top frame of the Cursor page, adding the library grid and the tabs. */
+.wp-body .wp-notice {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44px;
+  margin: 0;
+  z-index: 2;
+}
+.wp-main {
+  bottom: 12px;
+  overflow: hidden;
+}
+.wp-body .wp-notice ~ .wp-main {
+  top: 96px;
+}
+.wp-main > [role="tabpanel"] {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Library. */
+.wp-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.wp-url {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 200px;
+}
+.wp-url input,
+.wp-input,
+.lc-text {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font: 12.5px var(--font-text);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.wp-url input:focus,
+.wp-input:focus,
+.lc-text:focus {
+  border-color: var(--blue);
+}
+.wp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding-bottom: 8px;
+}
+.wp-empty {
+  grid-column: 1 / -1;
+  padding: 26px;
+  font-size: 13px;
+  color: var(--mut);
+  background: #fff;
+  clip-path: var(--cut);
+}
+.wp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  clip-path: var(--cut);
+  cursor: pointer;
+  transition: background 0.35s;
+  animation: shiftSlideLeft 0.7s var(--out) both;
+}
+.wp-card:hover,
+.wp-card.on {
+  background: #eef4ff;
+}
+.wp-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  z-index: 2;
+  transition: background 0.35s;
+}
+.wp-card.on::before {
+  background: var(--blue);
+}
+.wp-card .th {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: repeating-linear-gradient(135deg, #e3e7ee 0 1px, transparent 1px 8px), #f3f6fb;
+  overflow: hidden;
+}
+.wp-card .th img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wp-card .th .ph {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: 700 11px var(--font-display);
+  letter-spacing: 1px;
+  color: #aab3c1;
+}
+.wp-card .kd,
+.wp-card .bd {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 2px 6px;
+  font: 700 9px var(--font-display);
+  letter-spacing: 0.8px;
+  color: #fff;
+  background: rgba(34, 38, 47, 0.7);
+}
+.wp-card .bd {
+  left: auto;
+  right: 6px;
+  background: var(--danger);
+}
+.wp-card .nm {
+  padding: 8px 30px 2px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.wp-card .use {
+  padding: 0 12px 8px;
+  font: 800 8px var(--font-display);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.wp-card:not(.on) .nm {
+  padding-bottom: 10px;
+}
+.wp-card.bad {
+  opacity: 0.55;
+  cursor: default;
+}
+.wp-card .more {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  width: 24px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  color: var(--ink2);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.3s;
+}
+.wp-card:hover .more,
+.wp-card:focus-within .more {
+  opacity: 1;
+}
+.wp-card.add {
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  background: #f3f6fb;
+}
+.wp-card.add b {
+  font-size: 13px;
+  color: var(--blue);
+}
+.wp-menu {
+  position: absolute;
+  right: 6px;
+  bottom: 28px;
+  z-index: 20;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 22px rgba(34, 38, 47, 0.14);
+}
+.wp-menu button {
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: 12px var(--font-text);
+  color: var(--ink);
+  cursor: pointer;
+}
+.wp-menu button:hover {
+  background: #eef4ff;
+}
+.wp-menu button.danger {
+  color: var(--danger);
+}
+.wp-main.off .wp-card.on::before {
+  background: transparent;
+}
+
+/* Screen. */
+.wp-screen {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.wp-pv small {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--mut);
+}
+.wp-side .row .hint {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Playback / Auto-pause / Properties. */
+.wp-rule {
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.wp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.wp-chips .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 4px 0 10px;
+  background: #eef4ff;
+  font-size: 12px;
+  color: var(--blue2);
+}
+.wp-chips .chip button {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: transparent;
+  color: var(--blue2);
+  cursor: pointer;
+}
+.wp-reset {
+  margin-top: 12px;
+}
+.lc .row > label {
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lc .row .rngw {
+  flex: 1;
+}
+.lc-color {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lc-sw {
+  width: 32px;
+  height: 22px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.lc-label {
+  margin-top: 6px;
+}
+
+/* Thumbnail strip on the Home page (the first 6 wallpapers of the library). */
+.hero .strip {
+  position: absolute;
+  left: 486px;
+  top: 40px;
+  width: 94px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero .strip button {
+  position: relative;
+  width: 94px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: #1d2129;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.3s, transform 0.3s var(--ov);
+}
+.hero .strip button:hover,
+.hero .strip button:focus-visible {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+.hero .strip button.on {
+  opacity: 1;
+  box-shadow: inset 4px 0 0 var(--blue);
+}
+.hero .strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
